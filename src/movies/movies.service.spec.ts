@@ -40,9 +40,12 @@ describe('MoviesService', () => {
     it('should throw a NotFoundException', () => {
       try {
         service.getOne(999);
-      } catch (e) {
-        expect(e).toBeInstanceOf(NotFoundException);
-        expect(e.message).toEqual('Movie with ID 999 not found');
+      } catch (e: unknown) {
+        if (e instanceof NotFoundException) {
+          expect(e.message).toEqual('Movie with ID 999 not found');
+        } else {
+          throw e;
+        }
       }
     });
   });
@@ -64,9 +67,12 @@ describe('MoviesService', () => {
     it('should throw a NotFoundException', () => {
       try {
         service.deleteOne(999);
-      } catch (e) {
-        expect(e).toBeInstanceOf(NotFoundException);
-        expect(e.message).toEqual('Movie with ID 999 not found');
+      } catch (e: unknown) {
+        if (e instanceof NotFoundException) {
+          expect(e.message).toEqual('Movie with ID 999 not found');
+        } else {
+          throw e;
+        }
       }
     });
   });
@@ -99,9 +105,12 @@ describe('MoviesService', () => {
     it('should throw a NotFoundException', () => {
       try {
         service.update(999, { title: 'updatedTest' });
-      } catch (e) {
-        expect(e).toBeInstanceOf(NotFoundException);
-        expect(e.message).toEqual('Movie with ID 999 not found');
+      } catch (e: unknown) {
+        if (e instanceof NotFoundException) {
+          expect(e.message).toEqual('Movie with ID 999 not found');
+        } else {
+          throw e;
+        }
       }
     });
   });
